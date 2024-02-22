@@ -73,3 +73,47 @@ while turns > 0:
     if turns == 0:
         print('Sorry, your game is over.')
         break
+
+def play_game():
+    """
+    Plays the game
+    """
+    print("we're having so much fun!")
+
+def rules():
+    """
+    Displays the rules
+    """
+    print("Let's learn how to play")
+
+def main_menu():
+    """
+    Displays the main menu
+    """
+    print('Welcome to battleships')
+    print('Main Menu')
+    print('Please enter a number between 1 - 3')
+    print('1 -- Play Game')
+    print('2 -- Rules')
+    print('3 -- Exit')
+
+    can_play = False
+
+    while not can_play:
+        choice = input('Please Choose an option')
+
+        if choice == '1':
+            print('chose play')
+            can_play = True
+            play_game()
+        elif choice == '2':
+            print('chose rulea')
+            can_play = True
+            rules()
+        elif choice == '3':
+            print('chose to leave')
+            exit()
+        else:
+            print('please choose an option between 1 - 3')
+
+
