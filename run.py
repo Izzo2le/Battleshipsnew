@@ -6,8 +6,6 @@ GUESS_BOARD = [[''] * 8 for _ in range(8)]
 
 letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
 
-# Define your functions (print_board, create_ships, get_ship_location, count_hit_ships) here
-
 def print_board(board):
     print('  A B C D E F G H')
     print('  ----------------')
@@ -49,21 +47,55 @@ def count_hit_ships(board):
     return count
 
 def play_game():
- """
-    Plays the game
-    """
-print("we're having so much fun!")
+    HIDDEN_BOARD = [[''] * 8 for _ in range(8)]
+    GUESS_BOARD = [[''] * 8 for _ in range(8)]
+    create_ships(HIDDEN_BOARD)
+    
+    turns = 10
+    while turns > 0:
+        print_board(GUESS_BOARD)
+        row, col = get_ship_location()
+        if HIDDEN_BOARD[row][col] == 'X':
+            print("Congratulations! You've hit a battleship!")
+            GUESS_BOARD[row][col] = 'X'
+            turns -= 1
+        else:
+            print("Sorry, you missed!")
+            if GUESS_BOARD[row][col] == '':
+                GUESS_BOARD[row][col] = 'O'
+            turns -= 1
+        
+        if count_hit_ships(GUESS_BOARD) == 5:
+            print("You've sunk all the battleships! You win!")
+            break
+        elif turns == 0:
+            print("Game over! You've run out of turns.")
+            print_board(HIDDEN_BOARD)
+            break
+    
+    after_game()
+
+def after_game():
+    print("Would you like to play again or go back to the main menu?")
+    print("1 -- Play Again")
+    print("2 -- Main Menu")
+    print("3 -- Exit")
+    choice = input("Enter your choice: ")
+    if choice == '1':
+        play_game()
+    elif choice == '2':
+        main_menu()
+    elif choice == '3':
+        print("Goodbye!")
+        exit()
+    else:
+        print("Invalid choice. Please enter a valid option.")
+        after_game()
 
 def rules():
-      """
-    Displays the rules
-    """
-print("The rules of the game are simple. The aim is to sink all five ships hidden on the board.")
+    print("The rules of the game are simple. The aim is to sink all five ships hidden on the board.")
 
 def main_menu():
-    """
-    Displays the main menu
-    """
     print('Welcome to Battleship!')
     print('1 -- Play Game')
     print('2 -- Rules')
@@ -73,7 +105,6 @@ def main_menu():
         choice = input('Please choose an option (1-3): ')
         if choice == '1':
             play_game()
-            break  # Breaks the loop to allow re-displaying the menu after the game
         elif choice == '2':
             rules()
         elif choice == '3':
@@ -82,9 +113,5 @@ def main_menu():
         else:
             print('Please choose an option between 1 - 3')
 
-# Main program starts here
 if __name__ == "__main__":
-    while True:
-        main_menu()
-
-
+    main_menu()
