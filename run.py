@@ -1,22 +1,19 @@
 from random import randint
 
-# Legend
-# 'X' for placing a ship and hitting a battleship
-# '' for available space
-# '-' for missed shot
-
+# Initialize boards
 HIDDEN_BOARD = [[''] * 8 for _ in range(8)]
 GUESS_BOARD = [[''] * 8 for _ in range(8)]
 
 letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
 
+# Define your functions (print_board, create_ships, get_ship_location, count_hit_ships) here
+
 def print_board(board):
     print('  A B C D E F G H')
-    print('  ----------------') 
+    print('  ----------------')
     row_number = 1
     for row in board:
-        
-        print("%d|%s|" % (row_number, " ".join(row or ' ' for row in row))) 
+        print("%d|%s|" % (row_number, " ".join(row if row else ' ' for row in row)))
         row_number += 1
 
 def create_ships(board):
@@ -51,71 +48,37 @@ def count_hit_ships(board):
                 count += 1
     return count
 
-create_ships(HIDDEN_BOARD)
-turns = 10
-print('Hi, Welcome to my Battleship game')
-while turns > 0:
-    print_board(GUESS_BOARD)
-    row, column = get_ship_location()
-    if GUESS_BOARD[row][column] == '-' or GUESS_BOARD[row][column] == 'X':
-        print('You have already guessed that.')
-    elif HIDDEN_BOARD[row][column] == 'X':
-        print('Yay, congratulations, you have hit a battleship!')
-        GUESS_BOARD[row][column] = 'X'
-    else:
-        print('Oh no, sorry, you missed.')
-        GUESS_BOARD[row][column] = '-'
-    turns -= 1
-    if count_hit_ships(GUESS_BOARD) == 5:
-        print('Yay, congratulations, you have sunk all the battleships!')
-        break
-    print(f'You have {turns} turns remaining.')
-    if turns == 0:
-        print('Sorry, your game is over.')
-        break
-
 def play_game():
-    """
+ """
     Plays the game
     """
     print("we're having so much fun!")
 
 def rules():
-    """
-    Displays the rules
-    """
-    print("Let's learn how to play")
+    print("The rules of the game are simple. The aim is to sink all five ships hidden on the board.")
 
 def main_menu():
-    """
-    Displays the main menu
-    """
-    print('Welcome to battleships')
-    print('Main Menu')
-    print('Please enter a number between 1 - 3')
+    print('Welcome to Battleship!')
     print('1 -- Play Game')
     print('2 -- Rules')
     print('3 -- Exit')
 
-    can_play = False
-
-    while not can_play:
-        choice = input('Please Choose an option')
-
+    while True:
+        choice = input('Please choose an option (1-3): ')
         if choice == '1':
-            print('chose play')
-            can_play = True
             play_game()
+            break  # Breaks the loop to allow re-displaying the menu after the game
         elif choice == '2':
-            print('chose rulea')
-            can_play = True
             rules()
         elif choice == '3':
-            print('chose to leave')
+            print('Goodbye!')
             exit()
         else:
-            print('please choose an option between 1 - 3')
+            print('Please choose an option between 1 - 3')
 
+# Main program starts here
+if __name__ == "__main__":
+    while True:
         main_menu()
 
 
