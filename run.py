@@ -52,12 +52,18 @@ def play_game():
  """
     Plays the game
     """
-    print("we're having so much fun!")
+print("we're having so much fun!")
 
 def rules():
-    print("The rules of the game are simple. The aim is to sink all five ships hidden on the board.")
+      """
+    Displays the rules
+    """
+print("The rules of the game are simple. The aim is to sink all five ships hidden on the board.")
 
 def main_menu():
+    """
+    Displays the main menu
+    """
     print('Welcome to Battleship!')
     print('1 -- Play Game')
     print('2 -- Rules')
