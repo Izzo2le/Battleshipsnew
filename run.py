@@ -116,4 +116,6 @@ def main_menu():
         else:
             print('please choose an option between 1 - 3')
 
+        main_menu()
+
 
