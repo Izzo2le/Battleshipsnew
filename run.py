@@ -1,6 +1,5 @@
 from random import randint
 
-# Initialize boards
 HIDDEN_BOARD = [[''] * 8 for _ in range(8)]
 GUESS_BOARD = [[''] * 8 for _ in range(8)]
 
