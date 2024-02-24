@@ -57,6 +57,9 @@ def play_game():
         print_board(GUESS_BOARD)
         print(f"You have {turns} turns left.")
         row, col = get_ship_location()
+        if GUESS_BOARD[row][col] != '':
+            print("You've already tried that coordinate. Try again.")
+            continue
         if HIDDEN_BOARD[row][col] == 'X':
             print("Congratulations! You've hit a battleship!")
             GUESS_BOARD[row][col] = 'X'
