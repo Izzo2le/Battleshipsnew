@@ -47,6 +47,7 @@ def count_hit_ships(board):
     return count
 
 def play_game():
+    global HIDDEN_BOARD, GUESS_BOARD
     HIDDEN_BOARD = [[''] * 8 for _ in range(8)]
     GUESS_BOARD = [[''] * 8 for _ in range(8)]
     create_ships(HIDDEN_BOARD)
@@ -54,6 +55,7 @@ def play_game():
     turns = 10
     while turns > 0:
         print_board(GUESS_BOARD)
+        print(f"You have {turns} turns left.")
         row, col = get_ship_location()
         if HIDDEN_BOARD[row][col] == 'X':
             print("Congratulations! You've hit a battleship!")
