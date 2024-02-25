@@ -66,11 +66,33 @@ ADD IN PHOTOS
 
 ## Testing
 
+### Game Options
+
+- The testing phase for the Battleship game application revealed a well-designed user interface and robust error handling capabilities. Selecting '1' from the main menu initiates gameplay seamlessly, while '2' brings up the game rules, and '3' exits the game with a courteous 'Goodbye' message. The application excels in guiding users through invalid inputs; whether a letter, a number outside the 1-3 range, a negative number, a symbol, or even an empty input is entered, it consistently prompts with "Please choose an option between 1 - 3," ensuring clarity and preventing confusion. Additionally, the game smartly handles repeat guesses on coordinates by advising the player they've already attempted that particular spot, encouraging a new selection. This careful attention to user input and feedback underscores the game's user-friendly design and contributes to a smooth gaming experience.
+
+### Player Co-ordinated 
+
+- The game's row and column input validation process is designed to ensure players enter only acceptable values, enhancing the overall gameplay experience. When players input letters, numbers above 9, negative numbers, combinations of letters and numbers, double digits, or symbols while selecting a row, the system uniformly responds with "Invalid input. Please enter a valid row," maintaining consistency and clarity in user instructions. For column selection, entering a number within the 1-8 range correctly prompts the user to input a ship column using letters A-H. However, inputting double letters or no value at all—indicated by pressing the Enter key—results in specific error messages. The latter case triggers a technical error message, revealing an unhandled exception in the code when no input is provided. This detail highlights an area for improvement in error handling, ensuring the application gracefully manages all user inputs without defaulting to system error messages, thereby preserving the user interface's integrity and user experience.
+
+### User Input
+
+- The input validation system plays a crucial role in maintaining gameplay integrity and enhancing user experience. It consistently rejects invalid inputs such as double letters, numbers, excessively long strings, symbols, and out-of-range coordinates with a standard message, "Invalid input. Please enter a valid row." This ensures players stick to the correct input format, preventing confusion and potential game disruptions. Furthermore, it efficiently handles null inputs and prevents redundant moves by rejecting previously used coordinates, thereby ensuring smooth game progression with clear and consistent feedback for every action.
+
+### Play Game
+
+- the process of placing ships, registering hits, and misses, and updating the player's board is seamlessly managed with clear feedback mechanisms. When a new number followed by a letter is entered, signifying the placement of a battleship, the action is confirmed with "Battleship placed." In the event of a miss, the CPU's board updates with an 'O,' indicating the miss, along with a message displaying the remaining number of turns. Conversely, a hit is denoted by an 'X' on the CPU's board, accompanied by a message indicating the remaining number of turns, ensuring players are continuously informed about the game's progress with concise and informative feedback.
+
+### End Game 
+
+- The game ending is determined by the player's choice of input at critical junctures. If '1' is entered, indicating a desire to play again, a new game commences with the prompt, "Please enter a ship row, using numbers 1-8:" Players can then start afresh, continuing the gameplay cycle. Conversely, selecting '2' redirects the player to the instructions menu, offering a chance to review the rules and strategies before proceeding with the game. Lastly, choosing '3' triggers the game's conclusion, bidding farewell with a polite "Goodbye!" message, effectively ending the session. This structured approach ensures that players have clear options to either continue playing, seek guidance, or gracefully exit the game at their discretion, contributing to a satisfying gaming experience.
+
 ### PEP8
 
 - In the development of the project, I adhered to coding standards by utilizing Pep8 (https://pep8ci.herokuapp.com/) for maintaining code quality and consistency. While the tool did highlight some issues, these were predominantly related to whitespace and instances where lines exceeded the recommended length. It's important to note that the lines identified as too long were intentionally kept that way. Altering their length would have negatively impacted the functionality of the code, as certain commands and structures required specific formatting to operate correctly. 
 
-## Deployment N
+
+
+## Deployment 
 
 - Github 
 
