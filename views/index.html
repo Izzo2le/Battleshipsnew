@@ -1,27 +1,68 @@
 <body>
-    <button onclick="window.location.reload()">Run Program</button>
-    <div id="terminal"></div>
+  <button onclick="window.location.reload()">Run Program</button>
+  <div id="terminal"></div>
 
-    <script>
-        var term = new Terminal({
-            cols: 80,
-            rows: 24
-        });
-        term.open(document.getElementById('terminal'));
-        term.writeln('Running startup command: python3 run.py');
-        term.writeln('');
+  <input
+    id="mobileInput"
+    type="text"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    style="position:absolute;top:-9999px;"
+  >
 
-        var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
-            ':' + location.port) : '') + '/');
+  <script>
+    const isMobile = window.innerWidth < 600;
 
-        ws.onopen = function () {
-            new attach.attach(term, ws);
-        };
+    const term = new Terminal({
+      cols: isMobile ? 40 : 80,
+      rows: isMobile ? 20 : 24,
+      fontSize: isMobile ? 10 : 14,
+      convertEol: true,
+      theme: {
+        background: '#000000',
+        foreground: '#00FF00'
+      }
+    });
 
-        ws.onerror = function (e) {
-            console.log(e);
-        };
-        // Set focus in the terminal
-        document.getElementsByClassName("xterm-helper-textarea")[0].focus();
-    </script>
+    term.open(document.getElementById('terminal'));
+    term.writeln('Running startup command: python3 run.py');
+    term.writeln('');
+
+    const ws = new WebSocket(
+      location.protocol.replace('http', 'ws') +
+      '//' +
+      location.hostname +
+      (location.port ? ':' + location.port : '') +
+      '/'
+    );
+
+    ws.onopen = function () {
+      attach.attach(term, ws); 
+    };
+
+    ws.onerror = function (e) {
+      console.error('WebSocket error:', e);
+    };
+
+    setTimeout(() => {
+      document.querySelector('.xterm-helper-textarea')?.focus();
+    }, 200);
+
+    if (isMobile) {
+      const mobileInput = document.getElementById('mobileInput');
+      mobileInput.focus();
+
+      mobileInput.addEventListener('input', () => {
+        const value = mobileInput.value;
+        if (value) {
+          term.write(value + '\r'); 
+          mobileInput.value = '';
+        }
+      });
+
+      document.getElementById('terminal').addEventListener('click', () => {
+        mobileInput.focus();
+      });
+    }
+  </script>
 </body>
